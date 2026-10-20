@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/* ELVINI design tokens — derived from the aengel.io analysis (ANALISE_AENGEL.md)
+   One deep black, text hierarchy by opacity only, a single accent (orange). */
+@theme {
+  --color-bg: #070707;
+  --color-panel: #f3f3f1;
+  --color-fg: #ebebeb;
+  --color-accent: #d9bd78;
+  --color-accent-2: #5fe3e8;
+  --color-ok: #2ecc40;
+  --font-display: "League Spartan", "Arial Black", Arial, sans-serif;
+  --font-sans: "Manrope", "Segoe UI", Helvetica, Arial, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root { color-scheme: dark; }
+html { background: var(--color-bg); }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+* {
+  box-sizing: border-box;
+  min-width: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+button, a {
+  touch-action: manipulation;
+}
+::selection { background: var(--color-accent); color: #0a0a0a; }
+
+/* Type roles */
+.t-display { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; letter-spacing: -0.035em; line-height: 0.88; }
+.t-display-md { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.95; }
+.t-label { font-family: var(--font-sans); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.8rem; line-height: 1.35; }
+.t-micro { font-family: var(--font-sans); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.62rem; line-height: 1.4; }
+.t-mono-num { font-variant-numeric: tabular-nums; }
+
+/* Opacity hierarchy (never other greys) */
+.o-95 { color: rgba(235,235,235,0.95); }
+.o-85 { color: rgba(235,235,235,0.85); }
+.o-55 { color: rgba(235,235,235,0.55); }
+.o-35 { color: rgba(235,235,235,0.35); }
+
+/* Background grid used by loader and HUD sections */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 54px 54px;
+  background-position: center top;
+}
+
+/* Underlined action link, animated from the left */
+.u-link { position: relative; display: inline-flex; align-items: center; gap: 0.4em; padding-bottom: 0.35em; text-decoration: none; }
+.u-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform-origin: left; transform: scaleX(1); transition: transform 0.5s var(--ease-out-expo); }
+.u-link:hover::after { transform: scaleX(0); transform-origin: right; }
+.u-link .arrow { display: inline-block; transition: transform 0.4s var(--ease-out-expo); }
+.u-link:hover .arrow { transform: translate(3px, 3px); }
+
+/* Pill button (as in the project pages) */
+.pill { display: inline-flex; align-items: center; gap: 0.6em; min-height: 48px; padding: 0 1.4rem; border-radius: 999px; border: 1px solid currentColor; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.35s var(--ease-out-expo), color 0.35s var(--ease-out-expo), transform 0.35s var(--ease-out-expo); }
+.pill .arrow { transition: transform 0.4s var(--ease-out-expo); }
+.pill:hover .arrow { transform: translateX(4px); }
+.pill-accent { background: var(--color-accent); border-color: var(--color-accent); color: #0a0a0a; }
+.pill-accent:hover { background: #ead08f; border-color: #ead08f; }
+.pill-dark { background: #0a0a0a; border-color: #0a0a0a; color: #ebebeb; }
+.pill-dark:hover { background: #222; border-color: #222; }
+
+/* Registration marks (+) on the white panel */
+.reg { position: absolute; width: 22px; height: 22px; pointer-events: none; opacity: 0.35; }
+.reg::before, .reg::after { content: ""; position: absolute; background: currentColor; }
+.reg::before { left: 50%; top: 0; width: 1px; height: 100%; }
+.reg::after { top: 50%; left: 0; height: 1px; width: 100%; }
+
+/* Marquee */
+.marquee { overflow: hidden; white-space: nowrap; mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: inline-flex; gap: 2.5rem; padding-right: 2.5rem; animation: marquee 28s linear infinite; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Barcode (CSS only) */
+.barcode { height: 34px; background: repeating-linear-gradient(to right, currentColor 0 2px, transparent 2px 4px, currentColor 4px 5px, transparent 5px 8px, currentColor 8px 11px, transparent 11px 13px); }
+
+/* Statements over the bright disc: soft dark halo behind the white words; highlighted words in dark ink with a light edge */
+.stmt-text { text-shadow: 0 2px 28px rgba(0,0,0,0.85), 0 0 6px rgba(0,0,0,0.6); }
+.hl-dark { color: #0b0b0b; -webkit-text-stroke: 1px rgba(255,255,255,0.55); text-shadow: 0 0 18px rgba(217,189,120,0.65); }
+
+/* Typewriter cursor (segmented block, as in the reference) */
+.cursor-seg { display: inline-block; width: 0.14em; height: 0.74em; margin-left: 0.08em; vertical-align: 0.02em; background: repeating-linear-gradient(to bottom, var(--color-accent-2) 0 28%, transparent 28% 36%); animation: blink 0.9s steps(2) infinite; }
+/* Typewriter cursor */
+.cursor { display: inline-block; width: 0.08em; height: 0.85em; background: var(--color-accent-2); margin-left: 0.06em; vertical-align: -0.05em; animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Word reveal: visible at rest; JS adds .is-armed before animating */
+.reveal .w { display: inline-block; }
+.reveal.is-armed .w { opacity: 0; transform: translateY(0.6em); filter: blur(6px); }
+
+/* Focus */
+a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .cursor { animation: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}

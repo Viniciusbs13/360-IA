@@ -1,0 +1,8 @@
+{
+  "name": "ELVINI — Aprenda a usar IA de verdade",
+  "description": "Site de vendas do curso ELVINI: experiência imersiva em React + Three.js + GSAP, com loader, cena generativa, módulos, oferta e FAQ.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
